@@ -1,9 +1,19 @@
 from django.shortcuts import render, redirect, get_object_or_404
-form .models import Post
 from .forms import PostForm
+# from django.contrib.auth.views import SignUpView
+
+# from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'home.html')
+
+def my_protected_view(request):
+    return render(request, 'my_protected_view.html')
+
+# class CustomSignUpView(SignUpView):
+#     form_class = CustomUserCreationForm
+#     template_name = 'signup.html'
 
 def subpost_detail(request, subpost_name):
     return render(request, 'subpost_detail.html', {'subpost_name': subpost_name})
