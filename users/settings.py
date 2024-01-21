@@ -156,6 +156,19 @@
 
 from pathlib import Path
 import os
+import environ
+from dotenv import load_dotenv
+from decouple import config
+
+load_dotenv()
+
+environ.Env()
+environ.Env.read_env()
+
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+S3_BUCKET = os.getenv('S3_BUCKET')
+S3_BASE_URL = os.getenv('S3_BASE_URL')
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -212,7 +225,8 @@ ROOT_URLCONF = 'users.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'main_app', 'templates')],
+        # 'DIRS': [os.path.join(BASE_DIR, 'main_app', 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

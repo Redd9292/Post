@@ -6,6 +6,11 @@ name = "pypi"
 [packages]
 django = "*"
 psycopg2-binary = "*"
+pillow = "*"
+django-environ = "*"
+boto3 = "*"
+python-decouple = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
