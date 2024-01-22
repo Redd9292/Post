@@ -5,10 +5,8 @@ Post is forum site with Python Django and styled with Tailwind CSS. It provides 
 ## Features
 
 - User Registration and Authentication
-- Create, Edit, and Delete Posts
+
 - Comment on Posts
-- Upvote and Downvote Posts and Comments
-- User Profile with Activity History
 
 Home:
 ![](./main_app/static/Screenshot%202024-01-21%20at%207.49.22 PM.png)
@@ -16,8 +14,19 @@ Home:
 Post:
 ![](./main_app/static/Screenshot%202024-01-21%20at%207.49.48 PM.png)
 
+## Future enhancements
+
+- Edit and Delete Posts
+
+- Edit and Delete Comments
+
+- User Profile with Activity History
+
+- Upvote and Downvote Posts and Comments
+
 ## Technologies Used
 
 - Python Django: Web framework
+
 - PostreSQL: Database management system
 - Tailwind CSS: Frontend styling
