@@ -33,8 +33,6 @@ class CustomSignUpView(CreateView):
 def subpost_detail(request, subpost_name):
     return render(request, 'subpost_detail.html', {'subpost_name': subpost_name})
 
-
-
 @login_required 
 def post_detail(request, post_id):
     post = Post.objects.get(id = post_id)
