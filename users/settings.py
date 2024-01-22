@@ -294,3 +294,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Tailwind CSS Configuration
 TAILWIND_APP_NAME = 'theme'
+
+# Django Deployment on Heroku (comment out if you are going to spin up the app)
+import django_on_heroku
+django_on_heroku.settings(locals())

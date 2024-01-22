@@ -11,6 +11,8 @@ django-environ = "*"
 boto3 = "*"
 python-decouple = "*"
 python-dotenv = "*"
+django-on-heroku = "*"
+gunicorn = "*"
 
 [dev-packages]
 
