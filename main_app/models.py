@@ -23,8 +23,8 @@ class Subpost(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField(blank=True)
-    image = models.ImageField(upload_to='images/', blank=True, null=True)
-    video = models.FileField(upload_to='videos/', blank=True, null=True)
+    # image = models.ImageField(upload_to='images/', blank=True, null=True)
+    # video = models.FileField(upload_to='videos/', blank=True, null=True)
     link = models.URLField(blank=True, null=True)
 
     def __str__(self):
@@ -37,20 +37,20 @@ class Photo(models.Model):
     def __str__(self):
         return f"Photo for post_id: {self.post_id} @{self.url}"
 
-    # Many-to-many fields for tracking votes
-    upvoted_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='upvoted_posts', blank=True)
-    downvoted_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='downvoted_posts', blank=True)
+    # # Many-to-many fields for tracking votes
+    # upvoted_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='upvoted_posts', blank=True)
+    # downvoted_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='downvoted_posts', blank=True)
 
-    @property
-    def upvotes(self):
-        return self.upvoted_users.count()
+    # @property
+    # def upvotes(self):
+    #     return self.upvoted_users.count()
 
-    @property
-    def downvotes(self):
-        return self.downvoted_users.count()
+    # @property
+    # def downvotes(self):
+    #     return self.downvoted_users.count()
 
-    def __str__(self):
-        return self.title
+    # def __str__(self):
+    #     return self.title
 
 
 class Comment(models.Model):

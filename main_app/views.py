@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm, CustomUserCreationForm, CommentForm, PhotoForm
 from .models import Post, Comment, Subscription, Photo
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 
 def some_function(request):
@@ -370,7 +370,7 @@ def custom_logout(request):
 
 #main_app/
 
-
+@login_required
 def add_photo(request, post_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
@@ -400,3 +400,22 @@ def add_photo(request, post_id):
 #     return render(request, 'post_detail.html', {'post': post, 'photos': photos})
 
 
+
+
+# def post_detail(request, post_id):
+#     post = get_object_or_404(Post, id = post_id)
+#     comments = post.comments.all()
+    
+#     if request.method == 'POST':
+#         # Handle POST request to submit a new comment
+#         comment_form = CommentForm(request.POST)
+#         if comment_form.is_valid():
+#             new_comment = comment_form.save(commit=False)
+#             new_comment.post = post
+#             new_comment.author = request.user  # Assign the authenticated user as the author
+#             new_comment.save()
+#     else:
+#         # Handle GET request (render the comment form)
+#         comment_form = CommentForm()
+    
+#     return render(request, 'main_app/post_detail.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
