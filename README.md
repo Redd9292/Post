@@ -29,4 +29,7 @@ Post:
 - Python Django: Web framework
 
 - PostreSQL: Database management system
+
 - Tailwind CSS: Frontend styling
+
+- API: AWS Image Uploader

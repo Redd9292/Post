@@ -162,32 +162,6 @@ def create_post(request):
         form = PostForm()
 
     return render(request, 'create_post.html', {'form': form})
-# # #main_app/
-# @login_required
-# def create_post(request):
-#     if request.method == 'POST':
-#         form = PostForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             new_post = form.save(commit=False)
-#             photo = request.FILES.get('photo')
-#             if photo:
-#                 try:
-#                     s3 = boto3.client(
-#                         's3',
-#                         aws_access_key_id=AWS_ACCESS_KEY_ID,
-#                         aws_secret_access_key=AWS_SECRET_ACCESS_KEY
-#                     )
-#                     s3.upload_fileobj(photo, BUCKET_NAME, photo.name)
-#                     new_post.image_url = f'https://{BUCKET_NAME}.s3.amazonaws.com/{photo.name}'
-#                 except Exception as e:
-#                     print(f"Error uploading file to S3: {e}")
-#                     # Handle the error appropriately
-
-#             new_post.save()
-#             return redirect('post_detail', pk=new_post.pk)
-#     else:
-#         form = PostForm()
-#     return render(request, 'main_app/create_post.html', {'form': form})
 
 # EDIT START
 @login_required
@@ -326,47 +300,6 @@ def custom_logout(request):
     logout(request)
     messages.add_message(request, messages.SUCCESS, "You have successfully logged out.")
     return redirect('home')
-
-# def add_photo(request, post_id):
-#     post = get_object_or_404(Post, pk=post_id)
-
-#     if request.method == 'POST':
-#         form = PhotoForm(request.POST)
-#         if form.is_valid():
-#             new_photo = form.save(commit=False)
-#             new_photo.post = post
-#             new_photo.save()
-#             return redirect('post_detail', pk=post_id)
-#     else:
-#         form = PhotoForm()
-
-#     context = {'form': form, 'post': post}
-#     return render(request, 'add_photo.html', context)
-
-# def add_photo(request, post_id):
-#     # photo-file will be the "name" attribute on the <input type="file">
-#     photo_file = request.FILES.get('photo-file', None)
-#     if photo_file:
-#         s3 = boto3.client('s3')
-#         # need a unique "key" for S3 / needs image file extension too
-#         key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-#         # just in case something goes wrong
-#         try:
-#             bucket = os.environ['S3_BUCKET']
-#             s3.upload_fileobj(photo_file, bucket, key)
-#             # build the full url string
-#             url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-#             # we can assign to post_id or post (if you have a post object)
-#             Photo.objects.create(url=url, post_id=post_id)
-#         except Exception as e:
-#             print('An error occurred uploading file to S3')
-#             print(e)
-#     return redirect('detail', post_id=post_id)
-
-
-# def post_detail(request, post_id):
-#     post = get_object_or_404(Post, pk=post_id)  # Get the post by id
-#     return render(request, 'post_detail.html', {'post': post})
 
 #main_app/
 
