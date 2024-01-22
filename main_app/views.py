@@ -33,81 +33,20 @@ class CustomSignUpView(CreateView):
 def subpost_detail(request, subpost_name):
     return render(request, 'subpost_detail.html', {'subpost_name': subpost_name})
 
-# @login_required
-# def post_detail(request, pk):
-#     post = get_object_or_404(Post, pk=pk)
-#     comments = post.comments.all()
-#     # new_comment = None
-
-#     if request.method == 'POST':
-#         comment_form = CommentForm(data=request.POST)
-#         if comment_form.is_valid():
-#             new_comment = comment_form.save(commit=False)
-#             new_comment.author = request.user
-#             new_comment.post = post
-#             new_comment.save()
-#     else:
-#         comment_form = CommentForm()
-
-#     return render(request, 'post_detail.html', {
-#         'post': post,
-#         'comments': comments,
-#         'new_comment': new_comment,
-#         'comment_form': comment_form
-#     })
 
 
-# If login is required to post comments, uncomment the next line
-# @login_required
-# def post_detail(request, pk):
-#     post = get_object_or_404(Post, pk=pk)
-
-#     # Fetch comments here if not submitting a form, or after saving a comment
-#     comments = post.comments.all()  # Assuming 'comments' is the related_name in your Comment model
-
-#     if request.method == 'POST':
-#         comment_form = CommentForm(request.POST)
-#         if comment_form.is_valid():
-#             new_comment = comment_form.save(commit=False)
-#             new_comment.post = post
-
-#             # Check if the Comment model has an author field and user is authenticated
-#             if hasattr(new_comment, 'author') and request.user.is_authenticated:
-#                 new_comment.author = request.user
-
-#             new_comment.save()
-
-#             # Fetch comments again to include the new comment
-#             comments = post.comments.all()
-
-#             # Redirecting to the same page to display the updated list of comments
-#             return redirect('post_detail', pk=post.pk)
-#     else:
-#         comment_form = CommentForm()
-
-#     context = {
-#         'post': post,
-#         'comments': comments,
-#         'comment_form': comment_form
-#     }
-
-#     return render(request, 'post_detail.html', context)
-
-
-@login_required  # Optional: Use if you want only authenticated users to comment
+@login_required 
 def post_detail(request, post_id):
-    # post = get_object_or_404(Post, pk=pk)
     post = Post.objects.get(id = post_id)
     comments = post.comments.all()
-
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
             new_comment.post = post
-            new_comment.author = request.user  # Get the logged-in user
+            new_comment.author = request.user 
             new_comment.save()
-            return redirect('post_detail', post_id = post_id)  # Redirect back to the post detail page
+            return redirect('post_detail', post_id = post_id)  
     else:
         comment_form = CommentForm()
 
@@ -119,56 +58,24 @@ def post_detail(request, post_id):
     print('comment',comment_form)
     return render(request, 'post_detail.html', context)
 
-
-
-# @login_required  # Add this if you want to restrict access to authenticated users only
-# def post_detail(request, pk):
-#     post = get_object_or_404(Post, pk=pk)
-#     comments = post.comments.all()
-
-#     if request.method == 'POST':
-#         comment_form = CommentForm(request.POST)
-#         if comment_form.is_valid():
-#             new_comment = comment_form.save(commit=False)
-#             new_comment.post = post
-#             new_comment.author = request.user.username  # Use the username of the logged-in user
-#             new_comment.save()
-#             return redirect('post_detail', pk=post.pk)
-#     else:
-#         comment_form = CommentForm()
-
-#     context = {
-#         'post': post,
-#         'comments': comments,
-#         'comment_form': comment_form
-#     }
-#     return render(request, 'post_detail.html', context)
-
-
-
 @login_required
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             new_post = form.save()
-            # Handle the photo upload
             photo = request.FILES.get('photo')
             if photo:
-                Photo.objects.create(post=new_post, image=photo)  # Adjust according to your Photo model fields
-            return redirect('home')  # Redirect to a success page or the detail view of the post
-            
+                Photo.objects.create(post=new_post, image=photo) 
+            return redirect('home')   
     else:
         form = PostForm()
-
     return render(request, 'create_post.html', {'form': form})
 
-# EDIT START
 @login_required
 def edit_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.user != post.author:
-        # Redirect or show error if the user is not the owner
         return redirect('post_detail', pk=pk)
 
     if request.method == 'POST':
@@ -214,13 +121,11 @@ def delete_comment(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     if request.user != comment.author:
         return redirect('post_detail', pk=comment.post.pk)
-
     if request.method == 'POST':
         comment.delete()
         return redirect('post_detail', pk=comment.post.pk)
-
     return render(request, 'confirm_delete_comment.html', {'comment': comment})
-#    EDIT END
+
 
 @login_required
 def home_feed(request):
@@ -228,40 +133,25 @@ def home_feed(request):
     posts = Post.objects.filter(subpost__name__in=subscribed_subposts)
     return render(request, 'home_feed.html', {'posts': posts})
 
-# @login_required
-# def upvote_post(request, pk):
-#     if request.is_ajax() and request.method == "POST":
-#         post = get_object_or_404(Post, pk=pk)
-#         post.upvotes += 1
-#         post.save()
-#         return JsonResponse({"upvotes": post.upvotes})
-#     else:
-#         return JsonResponse({"error": "Invalid request"}, status=400)
-
 @login_required
 def upvote_post(request, pk):
     if request.is_ajax() and request.method == "POST":
-        post = get_object_or_404(Post, pk=pk)
-        # Check if user has already upvoted
+        post = get_object_or_404(Post, id = post_id)
         if request.user in post.upvoted_users.all():
-            # User is removing their upvote
             post.upvoted_users.remove(request.user)
             post.upvotes -= 1
         elif request.user in post.downvoted_users.all():
-            # User is changing their vote from downvote to upvote
             post.downvoted_users.remove(request.user)
             post.upvoted_users.add(request.user)
             post.downvotes -= 1
             post.upvotes += 1
         else:
-            # User is adding a new upvote
             post.upvoted_users.add(request.user)
             post.upvotes += 1
         post.save()
         return JsonResponse({"upvotes": post.upvotes, "downvotes": post.downvotes})
     else:
         return JsonResponse({"error": "Invalid request"}, status=400)
-
 
 @login_required
 def downvote_post(request, pk):
@@ -301,13 +191,10 @@ def custom_logout(request):
     messages.add_message(request, messages.SUCCESS, "You have successfully logged out.")
     return redirect('home')
 
-#main_app/
-
 @login_required
 def add_photo(request, post_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
-        # Initialize the S3 client
         s3 = boto3.client(
             's3'
             # aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
@@ -323,32 +210,6 @@ def add_photo(request, post_id):
             Photo.objects.create(url=url, post_id=post_id)
         except Exception as e:
             print(f'An error occurred uploading file to S3: {e}')
-            # Consider using Django's logging framework or sending this error to an admin email
-
+           
     return redirect('post_detail', post_id=post_id)
 
-# def post_detail(request, post_id):
-#     post = get_object_or_404(Post, pk=post_id)
-#     photos = Photo.objects.filter(post=post)  # Retrieve all photos associated with the post
-#     return render(request, 'post_detail.html', {'post': post, 'photos': photos})
-
-
-
-
-# def post_detail(request, post_id):
-#     post = get_object_or_404(Post, id = post_id)
-#     comments = post.comments.all()
-    
-#     if request.method == 'POST':
-#         # Handle POST request to submit a new comment
-#         comment_form = CommentForm(request.POST)
-#         if comment_form.is_valid():
-#             new_comment = comment_form.save(commit=False)
-#             new_comment.post = post
-#             new_comment.author = request.user  # Assign the authenticated user as the author
-#             new_comment.save()
-#     else:
-#         # Handle GET request (render the comment form)
-#         comment_form = CommentForm()
-    
-#     return render(request, 'main_app/post_detail.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
