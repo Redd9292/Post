@@ -178,18 +178,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# INSTALLED_APPS = [
-#     'main_app',
-#     'django.contrib.admin',
-#     'django.contrib.auth',
-#     'django.contrib.contenttypes',
-#     'django.contrib.sessions',
-#     'django.contrib.messages',
-#     'django.contrib.staticfiles',
-#     'tailwind',
-#     'main_app',
-#     'django_browser_reload',
-# ]
 
 INSTALLED_APPS = [
     'main_app',
