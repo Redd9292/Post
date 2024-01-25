@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "eefa5b9fd4413d9b6454c792d72d5f60e83ca9f3aed57a9619208dfde7b68563"
+            "sha256": "51e79ed35254cb6eac32ccf124b34585a8c6fe8e870a7a88498db34aabd0d6a0"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -26,20 +26,20 @@
         },
         "boto3": {
             "hashes": [
-                "sha256:791523f41b5e731c8ac0d2f65b978348fb6c92f02e0dbc9a7bc0b3760195cc60",
-                "sha256:795803812b78260cfe019ef65021ec9e8049bfb6a027564e1a3b59c1a4a11106"
+                "sha256:9e0dcca7bb0567f7b4b84d1d26c19b217abfe149d19106af7f120f09142688cf",
+                "sha256:fb56622ce195c06ae0d15ae9472d44529362a869ad52862a5a28b891530969f9"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==1.34.24"
+            "version": "==1.34.28"
         },
         "botocore": {
             "hashes": [
-                "sha256:4a48c15b87c6a72719a6c2d8688f4e52fe52c18ac9dfcaa25c7e62c5df475ee2",
-                "sha256:c92f810b5faec5126f3faf7dc7d77346e407ab3b89bb613290c86ff2fd5405b9"
+                "sha256:03be8209257ab65f3c8be7377cf8d38bff6a6afbe3d36c72924e48959bb694dc",
+                "sha256:45c99ccc6389ab1a87e996a7cc8797c7e41d5ecd9a5757d567ba3a57cb7655e7"
             ],
             "markers": "python_version >= '3.8'",
-            "version": "==1.34.24"
+            "version": "==1.34.28"
         },
         "dj-database-url": {
             "hashes": [
@@ -279,12 +279,12 @@
         },
         "python-dotenv": {
             "hashes": [
-                "sha256:a8df96034aae6d2d50a4ebe8216326c61c3eb64836776504fcca410e5937a3ba",
-                "sha256:f5971a9226b701070a4bf2c38c89e5a3f0d64de8debda981d1db98583009122a"
+                "sha256:e324ee90a023d808f1959c46bcbc04446a10ced277783dc6ee09987c37ec10ca",
+                "sha256:f7b63ef50f1b690dddf550d03497b66d609393b40b564ed0d674909a68ebf16a"
             ],
             "index": "pypi",
             "markers": "python_version >= '3.8'",
-            "version": "==1.0.0"
+            "version": "==1.0.1"
         },
         "s3transfer": {
             "hashes": [
@@ -309,6 +309,13 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.4.4"
+        },
+        "tailwindcss": {
+            "hashes": [
+                "sha256:2ba71105662701a522a13367844f7f5e8830456da69f30048291440431f8875b"
+            ],
+            "index": "pypi",
+            "version": "==0.0.1"
         },
         "typing-extensions": {
             "hashes": [
