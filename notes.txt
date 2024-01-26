@@ -920,3 +920,12 @@ class Subscription(models.Model):
                 </div>
             </div>
         </nav>
+
+
+
+
+
+
+
+
+         'tailwind',

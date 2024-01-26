@@ -13,6 +13,7 @@ python-dotenv = "*"
 django-on-heroku = "*"
 gunicorn = "*"
 django = "*"
+django-tailwind = "*"
 
 [dev-packages]
 
