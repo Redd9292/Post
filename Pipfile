@@ -12,8 +12,6 @@ python-decouple = "*"
 python-dotenv = "*"
 django-on-heroku = "*"
 gunicorn = "*"
-django-tailwindcss = "*"
-tailwindcss = "*"
 django = "*"
 
 [dev-packages]
